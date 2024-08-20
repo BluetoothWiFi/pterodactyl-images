@@ -10,7 +10,7 @@ on:
       - games/**
 jobs:
   push:
-    name: "games:carbon"
+    name: "games:${{ matrix.game }}"
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -36,9 +36,9 @@ jobs:
           password: ${{ secrets.GIT_TOKEN }}
       - uses: docker/build-push-action@v6
         with:
-          context: ./games/carbon
-          file: ./games/carbon/Dockerfile
+          context: ./games/${{ matrix.game }}
+          file: ./games/${{ matrix.game }}/Dockerfile
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/blutoothwifi/games:carbon
+            ghcr.io/blutoothwifi/games:${{ matrix.game }}
