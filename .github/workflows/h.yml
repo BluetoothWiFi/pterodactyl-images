@@ -20,23 +20,14 @@ jobs:
       id-token: write
 
     steps:
-      - name: Log into registry ${{ env.REGISTRY }}
-        if: github.event_name != 'pull_request'
-        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      
       - name: Delete workflow runs
   # You may pin to the exact commit or the version.
   # uses: Mattraks/delete-workflow-runs@39f0bbed25d76b34de5594dceab824811479e5de
         uses: Mattraks/delete-workflow-runs@v2.0.6
         with:
-          token: ${{ secrets.GIT_TOKEN }} # default is ${{ github.token }}
-    # Base API URL
-    
-    # Name of the repository
+          token: ${{ secrets.GIT_TOKEN }}
           repository:  ${{ github.repository }}
+          keep_minimum_runs: 0
+          retain_days: 0
+          
     
