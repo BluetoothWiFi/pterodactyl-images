@@ -35,4 +35,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/BluetoothWiFi/games:${{ matrix.game }}
+            ghcr.io/bluetoothwifi/games:${{ matrix.game }}
