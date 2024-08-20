@@ -22,9 +22,9 @@
 
 FROM 		--platform=$TARGETOS/$TARGETARCH debian:bullseye-slim
 
-LABEL       author="SturdyStubs" maintainer="BippyMiester"
+LABEL       author="SturdyStubs" maintainer="BluetoothWiFi"
 
-LABEL       org.opencontainers.image.source="https://github.com/SturdyStubs/pterodactyl-images"
+LABEL       org.opencontainers.image.source="https://github.com/BluetoothWiFi/pterodactyl-images"
 LABEL       org.opencontainers.image.licenses=MIT
 
 ENV         DEBIAN_FRONTEND=noninteractive
