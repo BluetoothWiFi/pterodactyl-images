@@ -130,7 +130,7 @@ function Download_Extensions() {
     printf "${BLUE}Checking Extension Downloads...${NC}"
 
     # Check if any of the extensions variables are set to true
-    if [ "${RUSTEDIT_EXT}" == "1" ] || [ "${DISCORD_EXT}" == "1" ] || [ "${CHAOS_EXT}" == "1" ]; then
+    if [ "${RUSTEDIT_EXT}" == "1" ] || [ "${DISCORD_EXT}" == "1" ] || [ "${CHAOS_EXT}" == "1" || "${NOSTEAM_EXT}" == 1 ]; then
         # Make temp directory
         mkdir -p /home/container/temp
         # Download RustEdit Extension
