@@ -157,7 +157,7 @@ function Download_Extensions() {
         #DL NoSteam
         if [ "${NOSTEAM_EXT}" == "1" ]; then
             echo -e "Downloading NoSteam Extension by Kaidoz"
-            curl -sSL -o /home/container/temp/NoSteam.dll https://github.com/BluetoothWiFi/nosteam/NoSteam.dll
+            curl -sSL -o /home/container/temp/NoSteam.dll https://github.com/BluetoothWiFi/nosteam/raw/main/NoSteam.dll
             printf "${GREEN}NoSteam Extension Downloaded!${NC}"
         fi
 
