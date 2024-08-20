@@ -153,6 +153,13 @@ function Download_Extensions() {
             curl -sSL -o /home/container/temp/Oxide.Ext.Chaos.dll https://chaoscode.io/oxide/Oxide.Ext.Chaos.dll
             printf "${GREEN}Chaos Code Extension Downloaded!${NC}"
         fi
+        
+        #DL NoSteam
+        if [ "${NOSTEAM_EXT}" == "1" ]; then
+            echo -e "Downloading NoSteam Extension by Kaidoz"
+            curl -sSL -o /home/container/temp/NoSteam.dll https://github.com/BluetoothWiFi/nosteam/NoSteam.dll
+            printf "${GREEN}NoSteam Extension Downloaded!${NC}"
+        fi
 
         # Handle Move of files based on framework
         files=(/home/container/temp/Oxide.Ext.*.dll)
@@ -161,10 +168,12 @@ function Download_Extensions() {
             if [[ ${FRAMEWORK} =~ "carbon" ]]; then
                 echo "Carbon framework detected!"
                 mv -v /home/container/temp/Oxide.Ext.*.dll /home/container/carbon/extensions/
+                mv -v /home/container/temp/NoSteam.dll /home/container/carbon/harmony/
             fi
             if [[ ${FRAMEWORK} =~ "oxide" ]]; then
                 echo "Oxide framework detected!"
                 mv -v /home/container/temp/Oxide.Ext.*.dll /home/container/RustDedicated_Data/Managed/
+                mv -v /home/container/temp/NoSteam.dll /home/container/HarmonyMods/
             fi
             printf "${GREEN}Move files has completed successfully!${NC}"
         else
