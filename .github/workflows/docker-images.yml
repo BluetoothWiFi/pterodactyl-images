@@ -1,0 +1,30 @@
+name: tredwfc
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      # This is used to complete the identity challenge
+      # with sigstore/fulcio when running outside of PRs.
+      id-token: write
+    strategy:
+      fail-fast: false
+      matrix:
+        game:
+          - carbon
+          - february2022
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build . --file ./games/${{ matrix.game }}/Dockerfile --tag games:${{ matrix.game }}
