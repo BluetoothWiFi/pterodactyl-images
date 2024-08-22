@@ -61,8 +61,10 @@ if [ "${RUSTEDIT_EXT}" == "1" ] || [ "${DISCORD_EXT}" == "1" ] || [ "${CHAOS_EXT
                 Info "Перемещаю туда файлы..."
                 if [ "${RUSTEDIT_EXT}" == "1" ] || [ "${DISCORD_EXT}" == "1" ] || [ "${CHAOS_EXT}" == "1" ]; then
                     mv -v /home/container/temp/Oxide.Ext.*.dll "/home/container/${MODDING_ROOT}/extensions/"
+                fi
                 if [ "${NOSTEAM_EXT}" == "1" ]; then
                     mv -v /home/container/temp/NoSteam.dll "/home/container/${MODDING_ROOT}/harmony/"
+                fi
             fi
             
             # If framework is oxide
