@@ -7,7 +7,7 @@ source /helpers/messages.sh
 #############################
 
 Debug "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
-Debug "Нахожусь внутри /sections/replace_startup_variables.sh!"
+Debug "Запускаю /sections/replace_startup_variables.sh!"
 
 Info "Изменяю переменные запуска..."
 
