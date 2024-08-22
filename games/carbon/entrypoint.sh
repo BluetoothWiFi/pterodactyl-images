@@ -9,7 +9,7 @@ source /helpers/messages.sh
 
 # Is debug mode enabled? Do you want to see more messages?
 if [[ "${EGG_DEBUG}" == "1" ]]; then
-    echo "Egg Debug Mode Enabled!"
+    echo "Запущен режим повышенной информации!"
 fi
 
 # Change Directory
@@ -20,11 +20,11 @@ cd /home/container
 ########################
 
 if [ -f /sections/app_public_ip.sh ]; then
-  Debug "/sections/app_public_ip.sh exists and is found!"
+  Debug "/sections/app_public_ip.sh существует!"
   # Directly run the script without chmod
   source /sections/app_public_ip.sh
 else
-  Error "/sections/app_public_ip.sh does not exist or cannot be found." "1"
+  Error "/sections/app_public_ip.sh не существует или не был найден :(" "1"
 fi
 
 ####################################
@@ -32,11 +32,11 @@ fi
 ####################################
 
 if [ -f /sections/modding_root_check.sh ]; then
-  Debug "/sections/modding_root_check.sh exists and is found!"
+  Debug "/sections/modding_root_check.sh существует!"
   # Directly run the script without chmod
   source /sections/modding_root_check.sh
 else
-  Error "/sections/modding_root_check.sh does not exist or cannot be found." "1"
+  Error "/sections/modding_root_check.sh не существует или не был найден :(" "1"
 fi
 
 ################################
@@ -44,11 +44,11 @@ fi
 ################################
 
 if [ -f /sections/oxide_carbon_switch.sh ]; then
-  Debug "/sections/oxide_carbon_switch.sh exists and is found!"
+  Debug "/sections/oxide_carbon_switch.sh существует!"
   # Directly run the script without chmod
   source /sections/oxide_carbon_switch.sh
 else
-  Error "/sections/oxide_carbon_switch.sh does not exist or cannot be found." "1"
+  Error "/sections/oxide_carbon_switch.sh не существует или не был найден :(" "1"
 fi
 
 ###################################
@@ -56,11 +56,11 @@ fi
 ###################################
 
 if [ -f /sections/auto_update_validate.sh ]; then
-  Debug "/sections/auto_update_validate.sh exists and is found!"
+  Debug "/sections/auto_update_validate.sh существует!"
   # Directly run the script without chmod
   source /sections/auto_update_validate.sh
 else
-  Error "/sections/auto_update_validate.sh does not exist or cannot be found." "1"
+  Error "/sections/auto_update_validate.sh не существует или не был найден :(" "1"
 fi
 
 #############################
@@ -68,11 +68,11 @@ fi
 #############################
 
 if [ -f /sections/replace_startup_variables.sh ]; then
-  Debug "/sections/replace_startup_variables.sh exists and is found!"
+  Debug "/sections/replace_startup_variables.sh существует!"
   # Directly run the script without chmod
   source /sections/replace_startup_variables.sh
 else
-  Error "/sections/replace_startup_variables.sh does not exist or cannot be found." "1"
+  Error "/sections/replace_startup_variables.sh не существует или не был найден :(" "1"
 fi
 
 ####################################
@@ -81,30 +81,30 @@ fi
 
 # We need to grab the modding_root_update function out of this helper file first
 if [ -f /helpers/modding_root_update.sh ]; then
-  Debug "/helpers/modding_root_update.sh exists and is found!"
+  Debug "/helpers/modding_root_update.sh существует!"
   # Directly run the script without chmod
   source /helpers/modding_root_update.sh
 else
-  Error "/helpers/modding_root_update.sh does not exist or cannot be found." "1"
+  Error "/helpers/modding_root_update.sh не существует или не был найден :(" "1"
 fi
 
 # Update Oxide First
 # It will continue on automatically if oxide is not the framework being used!
 if [ -f /sections/update_oxide.sh ]; then
-  Debug "/sections/update_oxide.sh exists and is found!"
+  Debug "/sections/update_oxide.sh существует!"
   # Directly run the script without chmod
   source /sections/update_oxide.sh
 else
-  Error "/sections/update_oxide.sh does not exist or cannot be found." "1"
+  Error "/sections/update_oxide.sh не существует или не был найден :(" "1"
 fi
 
 # Update Carbon Next
 if [ -f /sections/update_carbon.sh ]; then
-  Debug "/sections/update_carbon.sh exists and is found!"
+  Debug "/sections/update_carbon.sh существует!"
   # Directly run the script without chmod
   source /sections/update_carbon.sh
 else
-  Error "/sections/update_carbon.sh does not exist or cannot be found." "1"
+  Error "/sections/update_carbon.sh не существует или не был найден :(" "1"
 fi
 
 ########################
@@ -115,18 +115,18 @@ fi
 if [[ ${FRAMEWORK} != "vanilla" ]]; then
     # Handle the extension downloads
     if [ -f /sections/extension_download.sh ]; then
-      Debug "/sections/extension_download.sh exists and is found!"
+      Debug "/sections/extension_download.sh существует!"
       # Directly run the script without chmod
       source /sections/extension_download.sh
     else
-      Error "/sections/extension_download.sh does not exist or cannot be found." "1"
+      Error "/sections/extension_download.sh не существует или не был найден :(" "1"
     fi
 else # The framework is vanilla
-    Info "Skipping Extension Downloads, Vanilla Framework Detected!"
+    Info "Пропускаем установку расширений, так как Вы выбрали ванильный фреймворк!"
 fi
 
 # Fix for Rust not starting
-Debug "Defining the Library Path..."
+Debug "Определяем путь к библиотеке раста..."
 export LD_LIBRARY_PATH=$(pwd)/RustDedicated_Data/Plugins/x86_64:$(pwd)
 
 # Display Ending Splash Screen
