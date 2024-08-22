@@ -1,15 +1,15 @@
 source /helpers/messages.sh
 
-Red "╭──────────────────────────────────────────────────╮"
-Red "│                 AIO RUST EGG                     │"
-Red "│            Created By: SturdyStubs               │"
-Red "│               Edited By: uggtiu                  │"
-Red "├──────────────────────────────────────────────────┤"
-Red "│      Больше информации ищи в документации        │"
-Red "│        https://tinyurl.com/aiorustegg            │"
-Red "│         https://discord.gg/CUH3vADmMp            │"
-Red "│                 Version 2.0.0                    │"
-Red "╰──────────────────────────────────────────────────╯"
+Green "╭──────────────────────────────────────────────────╮"
+Green "│                 AIO RUST EGG                     │"
+Green "│            Created By: SturdyStubs               │"
+Green "│               Edited By: uggtiu                  │"
+Green "├──────────────────────────────────────────────────┤"
+Green "│      Больше информации ищи в документации        │"
+Green "│        https://tinyurl.com/aiorustegg            │"
+Green "│         https://discord.gg/CUH3vADmMp            │"
+Green "│                 Version 2.0.0                    │"
+Green "╰──────────────────────────────────────────────────╯"
 
 Info "Запускаемся!!"
 sleep 2
