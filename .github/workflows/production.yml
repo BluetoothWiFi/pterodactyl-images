@@ -3,12 +3,12 @@ name: Build Production Branch
 on:
   push:
     branches:
-      - production
+      - prod
     paths:
       - games/**
 jobs:
   push:
-    name: "aioegg:production"
+    name: "games:prod"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,7 +19,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GIT_TOKEN }}
       - uses: docker/build-push-action@v6
         with:
           context: ./games/carbon
@@ -27,4 +27,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/sturdystubs/aioegg:production
+            ghcr.io/bluetoothwifi/games:prod
