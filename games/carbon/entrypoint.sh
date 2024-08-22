@@ -20,7 +20,7 @@ cd /home/container
 ########################
 
 if [ -f /sections/app_public_ip.sh ]; then
-  Debug "/sections/app_public_ip.sh существует!"
+  Debug "/sections/app_public_ip.sh найден!"
   # Directly run the script without chmod
   source /sections/app_public_ip.sh
 else
@@ -32,7 +32,7 @@ fi
 ####################################
 
 if [ -f /sections/modding_root_check.sh ]; then
-  Debug "/sections/modding_root_check.sh существует!"
+  Debug "/sections/modding_root_check.sh найден!"
   # Directly run the script without chmod
   source /sections/modding_root_check.sh
 else
@@ -44,7 +44,7 @@ fi
 ################################
 
 if [ -f /sections/oxide_carbon_switch.sh ]; then
-  Debug "/sections/oxide_carbon_switch.sh существует!"
+  Debug "/sections/oxide_carbon_switch.sh найден!"
   # Directly run the script without chmod
   source /sections/oxide_carbon_switch.sh
 else
@@ -56,7 +56,7 @@ fi
 ###################################
 
 if [ -f /sections/auto_update_validate.sh ]; then
-  Debug "/sections/auto_update_validate.sh существует!"
+  Debug "/sections/auto_update_validate.sh найден!"
   # Directly run the script without chmod
   source /sections/auto_update_validate.sh
 else
@@ -68,7 +68,7 @@ fi
 #############################
 
 if [ -f /sections/replace_startup_variables.sh ]; then
-  Debug "/sections/replace_startup_variables.sh существует!"
+  Debug "/sections/replace_startup_variables.sh найден!"
   # Directly run the script without chmod
   source /sections/replace_startup_variables.sh
 else
@@ -81,7 +81,7 @@ fi
 
 # We need to grab the modding_root_update function out of this helper file first
 if [ -f /helpers/modding_root_update.sh ]; then
-  Debug "/helpers/modding_root_update.sh существует!"
+  Debug "/helpers/modding_root_update.sh найден!"
   # Directly run the script without chmod
   source /helpers/modding_root_update.sh
 else
@@ -91,7 +91,7 @@ fi
 # Update Oxide First
 # It will continue on automatically if oxide is not the framework being used!
 if [ -f /sections/update_oxide.sh ]; then
-  Debug "/sections/update_oxide.sh существует!"
+  Debug "/sections/update_oxide.sh найден!"
   # Directly run the script without chmod
   source /sections/update_oxide.sh
 else
@@ -100,7 +100,7 @@ fi
 
 # Update Carbon Next
 if [ -f /sections/update_carbon.sh ]; then
-  Debug "/sections/update_carbon.sh существует!"
+  Debug "/sections/update_carbon.sh найден!"
   # Directly run the script without chmod
   source /sections/update_carbon.sh
 else
@@ -115,7 +115,7 @@ fi
 if [[ ${FRAMEWORK} != "vanilla" ]]; then
     # Handle the extension downloads
     if [ -f /sections/extension_download.sh ]; then
-      Debug "/sections/extension_download.sh существует!"
+      Debug "/sections/extension_download.sh найден!"
       # Directly run the script without chmod
       source /sections/extension_download.sh
     else
