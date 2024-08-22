@@ -32,7 +32,7 @@ fi
 source /helpers/messages.sh
 
 Debug "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
-Debug "Выполняю /sections/auto_update_validate.sh!"
+Debug "Инициалицирую /sections/auto_update_validate.sh!"
 
 Info "Обработка автоматического обновления приложения с последующей его проверкой..."
 
