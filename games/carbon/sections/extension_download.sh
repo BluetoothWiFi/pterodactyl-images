@@ -74,7 +74,7 @@ if [ "${RUSTEDIT_EXT}" == "1" ] || [ "${DISCORD_EXT}" == "1" ] || [ "${CHAOS_EXT
                     mv -v /home/container/temp/Oxide.Ext.*.dll /home/container/RustDedicated_Data/Managed/
                 fi
                 if [ "${NOSTEAM_EXT}" == "1" ]; then
-                    mv -v /home/container/temp/NoSteam.dll "/home/container/${MODDING_ROOT}/HarmonyMods/"
+                    mv -v /home/container/temp/NoSteam.dll "/home/container/HarmonyMods/"
                 fi
             fi
 
