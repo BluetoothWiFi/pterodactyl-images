@@ -7,9 +7,9 @@ source /helpers/messages.sh
 #############################
 
 Debug "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
-Debug "Inside /sections/replace_startup_variables.sh file!"
+Debug "Нахожусь внутри /sections/replace_startup_variables.sh!"
 
-Info "Replacing Startup Variables..."
+Info "Изменяю переменные запуска..."
 
 # Replace Startup Variables (Keep this here. Important. Forgot exactly what the command does. But here's GPT's interpretation of it)
 # https://capture.dropbox.com/amLrR7iuKdJ3kSY6
@@ -17,4 +17,4 @@ Info "Replacing Startup Variables..."
 MODIFIED_STARTUP=$(eval echo "${STARTUP}" | sed -e 's/{{/${/g' -e 's/}}/}/g')
 Debug ":/home/container$ ${MODIFIED_STARTUP}"
 
-Success "Variables replaced!"
+Success "Переменные были изменены успешно!"
