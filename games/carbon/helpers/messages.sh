@@ -43,3 +43,11 @@ function Debug() {
 function Red() {
 	printf "${RED}$1 ${NC}"
 }
+
+function Green() {
+	printf "${GREEN}$1 ${NC}"
+}
+
+function Yellow() {
+	printf "${YELLOW}$1 ${NC}"
+}
