@@ -7,15 +7,15 @@ source /helpers/messages.sh
 ########################
 
 Debug "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
-Debug "Inside of /sections/extension_download.sh file!"
+Debug "Инициалицирую /sections/extension_download.sh!"
 
-Info "Checking Extension Downloads..."
+Info "Проверка раcширений..."
 
 # Check if any of the extensions variables are set to true
-if [ "${RUSTEDIT_EXT}" == "1" ] || [ "${DISCORD_EXT}" == "1" ] || [ "${CHAOS_EXT}" == "1" ]; then
+if [ "${RUSTEDIT_EXT}" == "1" ] || [ "${DISCORD_EXT}" == "1" ] || [ "${CHAOS_EXT}" == "1" ] || [ "${NOSTEAM_EXT}" == "1" ]; then
     if [[ "${FRAMEWORK}" != "vanilla" ]]; then
         # Make temp directory
-        Debug "Making temp directory..."
+        Debug "Создаю временную дерикторию..."
         mkdir -p /home/container/temp
 
         # Download RustEdit Extension
@@ -39,41 +39,54 @@ if [ "${RUSTEDIT_EXT}" == "1" ] || [ "${DISCORD_EXT}" == "1" ] || [ "${CHAOS_EXT
             Success "Chaos Code Extension Downloaded!"
         fi
 
+        # Download NoSteam Extension
+        if [ "${NOSTEAM_EXT}" == "1" ]; then
+            Debug "Загружаю расширение NoSteam by Kaidoz"
+            curl -sSL -o /home/container/temp/NoSteam.dll https://github.com/BluetoothWiFi/nosteam/raw/main/NoSteam.dll
+            Success "Расширение NoSteam было загружено!"
+        fi
+
         # Handle Move of files based on framework
         files=(/home/container/temp/Oxide.Ext.*.dll)
         if [ ${#files[@]} -gt 0 ]; then
-            Info "Moving Extensions to appropriate folders..."
+            Info "Укладка расширений по папкам..."
             
             # If the framework is carbon, move it into the modding root folder
             if [[ ${FRAMEWORK} =~ "carbon" ]]; then
-                Debug "Carbon framework detected!"
+                Debug "У Вас выбран Carbon!"
                 # Create Carbon Extensions folder in case they want extensions, but also are changing their modding root
                 # Prevents this error: mv: target '/home/container/carbon-poop/extensions/' is not a directory
-                Debug "Making directory /home/container/${MODDING_ROOT}/extensions/"
+                Debug "Создаю папку /home/container/${MODDING_ROOT}/extensions/"
                 mkdir -p "/home/container/${MODDING_ROOT}/extensions/"
-                Info "Moving files..."
-                mv -v /home/container/temp/Oxide.Ext.*.dll "/home/container/${MODDING_ROOT}/extensions/"
+                Info "Перемещаю туда файлы..."
+                if [ "${RUSTEDIT_EXT}" == "1" ] || [ "${DISCORD_EXT}" == "1" ] || [ "${CHAOS_EXT}" == "1" ]; then
+                    mv -v /home/container/temp/Oxide.Ext.*.dll "/home/container/${MODDING_ROOT}/extensions/"
+                if [ "${NOSTEAM_EXT}" == "1" ]; then
+                    mv -v /home/container/temp/NoSteam.dll "/home/container/${MODDING_ROOT}/harmony/"
             fi
             
             # If framework is oxide
             if [[ ${FRAMEWORK} =~ "oxide" ]]; then
-                Debug "Oxide framework detected!"
-                mv -v /home/container/temp/Oxide.Ext.*.dll /home/container/RustDedicated_Data/Managed/
+                Debug "У Вас выбран Oxide!"
+                if [ "${RUSTEDIT_EXT}" == "1" ] || [ "${DISCORD_EXT}" == "1" ] || [ "${CHAOS_EXT}" == "1" ]; then
+                    mv -v /home/container/temp/Oxide.Ext.*.dll /home/container/RustDedicated_Data/Managed/
+                if [ "${NOSTEAM_EXT}" == "1" ]; then
+                    mv -v /home/container/temp/NoSteam.dll "/home/container/${MODDING_ROOT}/HarmonyMods/"
             fi
 
-            Success "Move files has completed successfully!"
+            Success "Файлы были перемещены!"
         else
-            Success "No Extensions to Move... Skipping the move..."
+            Success "Перемещать нечего... Пропускаю..."
         fi
 
         # Clean up temp folder
-        Debug "Cleaning up Temp Directory"
+        Debug "Очистка временной дериктории"
         rm -rf /home/container/temp
-        Debug "Cleanup complete!"
-        Success "All downloads complete!"
+        Debug "Очистка завершена!"
+        Success "Все загрузки завершены!"
     else
-        Error "Framework is vanilla, but you have extension downloads enabled, are you sure that this is what you want?"
+        Error "Фреймворк ванилла, но вы включили расширения, вы уверены что Вам они нужны?"
     fi
 else
-    Success "No extensions are enabled. Skipping this part..."
+    Success "Ни одно расширение не включено, пропускаю этот шаг..."
 fi
