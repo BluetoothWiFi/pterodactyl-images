@@ -121,6 +121,14 @@ if [[ ${FRAMEWORK} != "vanilla" ]]; then
     else
       Error "/sections/extension_download.sh не существует или не был найден :(" "1"
     fi
+    # Handle the extension downloads
+    if [ -f /sections/extension_deleter.sh ]; then
+      Debug "/sections/extension_deleter.sh найден!"
+      # Directly run the script without chmod
+      source /sections/extension_deleter.sh
+    else
+      Error "/sections/extension_deleter.sh не существует или не был найден :(" "1"
+    fi
 else # The framework is vanilla
     Info "Пропускаем установку расширений, так как Вы выбрали ванильный фреймворк!"
 fi
