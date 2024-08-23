@@ -42,17 +42,18 @@ if [ "${RUSTEDIT_EXT}" == "1" ] || [ "${DISCORD_EXT}" == "1" ] || [ "${CHAOS_EXT
 
         # Download NoSteam Extension
         if [ "${NOSTEAM_EXT}" == "1" ]; then
+        curl -sSL -o /home/container/share/nosteam/status_carbon.txt https://github.com/BluetoothWiFi/pterodactyl-images/raw/prod/games/status/nosteam_carbon.txt
+        curl -sSL -o /home/container/share/nosteam/status_oxide.txt https://github.com/BluetoothWiFi/pterodactyl-images/raw/prod/games/status/nosteam_oxide.txt
+        chmod 777 /home/container/share/nosteam/*
             if [[ ${FRAMEWORK} =~ "carbon" ]]; then
-                curl -sSL -o /home/container/share/nosteam/status_carbon.txt https://github.com/BluetoothWiFi/pterodactyl-images/raw/prod/games/status/nosteam_carbon.txt
-                status=cat /home/container/share/nosteam/status_carbon.txt
+                status=$( cat /home/container/share/nosteam/status_carbon.txt )
                 Debug "Статус: ${status}"
                 if [ "${status}" == "1" ]; then
                     Debug "Загружаю расширение NoSteam by Kaidoz"
                     curl -sSL -o /home/container/temp/NoSteam.dll https://github.com/BluetoothWiFi/nosteam/raw/main/NoSteam.dll
                     Success "Расширение NoSteam было загружено!"
                 else
-                    curl -sSL -o /home/container/share/nosteam/status_oxide.txt https://github.com/BluetoothWiFi/pterodactyl-images/raw/prod/games/status/nosteam_oxide.txt
-                    other_status=cat /home/container/share/nosteam/status_oxide.txt
+                    other_status=$( cat /home/container/share/nosteam/status_oxide.txt )
                     Error "Расширение NoSteam by Kaidoz временно работает некорректно с фреймворком Carbon!"
                     if [ "${other_status}" == "1" ]; then
                         Error "Для запуска расширения выберите фреймворк Oxide во вкладке Запуск(Startup) -> Фреймворк."
@@ -66,16 +67,14 @@ if [ "${RUSTEDIT_EXT}" == "1" ] || [ "${DISCORD_EXT}" == "1" ] || [ "${CHAOS_EXT
                 fi
             fi
             if [[ ${FRAMEWORK} =~ "oxide" ]]; then
-                curl -sSL -o /home/container/share/nosteam/status_oxide.txt https://github.com/BluetoothWiFi/pterodactyl-images/raw/prod/games/status/nosteam_oxide.txt
-                status=cat /home/container/share/nosteam/status_oxide.txt
+                status=$( cat /home/container/share/nosteam/status_oxide.txt )
                 Debug "Статус: ${status}"
                 if [ "${status}" == "1" ]; then
                     Debug "Загружаю расширение NoSteam by Kaidoz"
                     curl -sSL -o /home/container/temp/NoSteam.dll https://github.com/BluetoothWiFi/nosteam/raw/main/NoSteam.dll
                     Success "Расширение NoSteam было загружено!"
                 else
-                    curl -sSL -o /home/container/share/nosteam/status_carbon.txt https://github.com/BluetoothWiFi/pterodactyl-images/raw/prod/games/status/nosteam_carbon.txt
-                    other_status=cat /home/container/share/nosteam/status_carbon.txt
+                    other_status=$( cat /home/container/share/nosteam/status_carbon.txt )
                     Error "Расширение NoSteam by Kaidoz временно работает некорректно с фреймворком Carbon!"
                     if [ "${other_status}" == "1"]; then
                         Error "Для запуска расширения выберите фреймворк Carbon во вкладке Запуск(Startup) -> Фреймворк."
