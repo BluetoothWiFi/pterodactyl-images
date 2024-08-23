@@ -7,7 +7,7 @@ source /helpers/messages.sh
 ########################
 
 Debug "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
-Debug "Инициалицирую /sections/extension_download.sh!"
+Debug "Инициализицирую /sections/extension_download.sh!"
 
 Info "Проверка раcширений..."
 
@@ -20,31 +20,40 @@ if [ "${RUSTEDIT_EXT}" == "1" ] || [ "${DISCORD_EXT}" == "1" ] || [ "${CHAOS_EXT
 
         # Download RustEdit Extension
         if [ "${RUSTEDIT_EXT}" == "1" ]; then
-            Debug "Downloading RustEdit Extension"
+            Debug "Загружаю RustEdit Extension"
             curl -sSL -o /home/container/temp/Oxide.Ext.RustEdit.dll https://github.com/k1lly0u/Oxide.Ext.RustEdit/raw/master/Oxide.Ext.RustEdit.dll
             Success "RustEdit Extention Downloaded!"
         fi
 
         # Download Discord Extension
         if [ "${DISCORD_EXT}" == "1" ]; then
-            Debug "Downloading Discord Extension"
+            Debug "Загружаю Discord Extension"
             curl -sSL -o /home/container/temp/Oxide.Ext.Discord.dll https://umod.org/extensions/discord/download
             Success "Discord Extension Downloaded!"
         fi
 
         # Download Chaos Code Extension
         if [ "${CHAOS_EXT}" == "1" ]; then
-            Debug "Downloading Chaos Code Extension"
+            Debug "Загружаю Chaos Code Extension"
             curl -sSL -o /home/container/temp/Oxide.Ext.Chaos.dll https://chaoscode.io/oxide/Oxide.Ext.Chaos.dll
             Success "Chaos Code Extension Downloaded!"
         fi
 
         # Download NoSteam Extension
         if [ "${NOSTEAM_EXT}" == "1" ]; then
-            Debug "Загружаю расширение NoSteam by Kaidoz"
-            curl -sSL -o /home/container/temp/NoSteam.dll https://github.com/BluetoothWiFi/nosteam/raw/main/NoSteam.dll
-            Success "Расширение NoSteam было загружено!"
+            if [[ ${FRAMEWORK} =~ "carbon" ]]; then
+                Error "Расширение NoSteam by Kaidoz временно не работает корректно с фреймворком Carbon!"
+                Error "Выберите фреймворк Oxide во вкладке Запуск(Startup) -> Фреймворк."
+                Error "Сервер будет запущен, но без расширения NoSteam!"
+                Debug "Пропускаю этот шаг!"
+            fi
+            if [[ ${FRAMEWORK} =~ "oxide" ]]; then
+                Debug "Загружаю расширение NoSteam by Kaidoz"
+                curl -sSL -o /home/container/temp/NoSteam.dll https://github.com/BluetoothWiFi/nosteam/raw/main/NoSteam.dll
+                Success "Расширение NoSteam было загружено!"
+            fi
         fi
+        
 
         # Handle Move of files based on framework
         files=(/home/container/temp/Oxide.Ext.*.dll)
@@ -63,7 +72,8 @@ if [ "${RUSTEDIT_EXT}" == "1" ] || [ "${DISCORD_EXT}" == "1" ] || [ "${CHAOS_EXT
                     mv -v /home/container/temp/Oxide.Ext.*.dll "/home/container/${MODDING_ROOT}/extensions/"
                 fi
                 if [ "${NOSTEAM_EXT}" == "1" ]; then
-                    mv -v /home/container/temp/NoSteam.dll "/home/container/${MODDING_ROOT}/harmony/"
+                    Error "Расширение NoSteam by Kaidoz временно не работает корректно с фреймворком Carbon и загружено не было!"
+                    #mv -v /home/container/temp/NoSteam.dll "/home/container/${MODDING_ROOT}/harmony/"
                 fi
             fi
             
@@ -89,7 +99,7 @@ if [ "${RUSTEDIT_EXT}" == "1" ] || [ "${DISCORD_EXT}" == "1" ] || [ "${CHAOS_EXT
         Debug "Очистка завершена!"
         Success "Все загрузки завершены!"
     else
-        Error "Фреймворк ванилла, но вы включили расширения, вы уверены что Вам они нужны?"
+        Error "Фреймворк ванилла, но Dы включили расширения, вы уверены что Вам они нужны?"
     fi
 else
     Success "Ни одно расширение не включено, пропускаю этот шаг..."
