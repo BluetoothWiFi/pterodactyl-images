@@ -108,7 +108,7 @@ else
 fi
 
 ########################
-# EXTENSION DOWNLOADER #
+# EXTENSION DOWNLOADER&DELETER #
 ########################
 
 # If the framework isn't vanilla
