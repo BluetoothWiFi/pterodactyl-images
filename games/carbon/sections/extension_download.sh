@@ -42,15 +42,51 @@ if [ "${RUSTEDIT_EXT}" == "1" ] || [ "${DISCORD_EXT}" == "1" ] || [ "${CHAOS_EXT
         # Download NoSteam Extension
         if [ "${NOSTEAM_EXT}" == "1" ]; then
             if [[ ${FRAMEWORK} =~ "carbon" ]]; then
-                Error "Расширение NoSteam by Kaidoz временно не работает корректно с фреймворком Carbon!"
-                Error "Выберите фреймворк Oxide во вкладке Запуск(Startup) -> Фреймворк."
-                Error "Сервер будет запущен, но без расширения NoSteam!"
-                Debug "Пропускаю этот шаг!"
+                curl -sSL -o /home/container/share/nosteam/status_carbon.txt https://github.com/BluetoothWiFi/pterodactyl-images/blob/prod/games/status/nosteam_carbon.txt
+                status = cat /home/container/share/nosteam/status_carbon.txt
+                Debug "Статус: ${status}"
+                if [ "${status}" == "1" ]; then
+                    Debug "Загружаю расширение NoSteam by Kaidoz"
+                    curl -sSL -o /home/container/temp/NoSteam.dll https://github.com/BluetoothWiFi/nosteam/raw/main/NoSteam.dll
+                    Success "Расширение NoSteam было загружено!"
+                else
+                    curl -sSL -o /home/container/share/nosteam/status_oxide.txt https://github.com/BluetoothWiFi/pterodactyl-images/blob/prod/games/status/nosteam_oxide.txt
+                    other_status = cat /home/container/share/nosteam/status_oxide.txt
+                    Error "Расширение NoSteam by Kaidoz временно работает некорректно с фреймворком Carbon!"
+                    if [ "${other_status}" == "1"]; then
+                        Error "Для запуска расширения выберите фреймворк Oxide во вкладке Запуск(Startup) -> Фреймворк."
+                    else
+                        Error "В данный момент всем фреймворкам был установлен этот статус."
+                        Error "Оффициальный репозиторий расширения https://github.com/Kaidoz/Rust-NoSteam"
+                        Error "Если новое обновление вышло, а статус не был расширения не был изменен, то обратитесь в дискорд uggtiu!"
+                    fi 
+                    Error "Сервер будет запущен, но без расширения NoSteam!"
+                    Debug "Пропускаю этот шаг!"
+                fi
             fi
             if [[ ${FRAMEWORK} =~ "oxide" ]]; then
-                Debug "Загружаю расширение NoSteam by Kaidoz"
-                curl -sSL -o /home/container/temp/NoSteam.dll https://github.com/BluetoothWiFi/nosteam/raw/main/NoSteam.dll
-                Success "Расширение NoSteam было загружено!"
+                curl -sSL -o /home/container/share/nosteam/status_oxide.txt https://github.com/BluetoothWiFi/pterodactyl-images/blob/prod/games/status/nosteam_oxide.txt
+                status = cat /home/container/share/nosteam/status_oxide.txt
+                Debug "Статус: ${status}"
+                if [ "${status}" == "1" ]; then
+                    Debug "Загружаю расширение NoSteam by Kaidoz"
+                    curl -sSL -o /home/container/temp/NoSteam.dll https://github.com/BluetoothWiFi/nosteam/raw/main/NoSteam.dll
+                    Success "Расширение NoSteam было загружено!"
+                else
+                    curl -sSL -o /home/container/share/nosteam/status_carbon.txt https://github.com/BluetoothWiFi/pterodactyl-images/blob/prod/games/status/nosteam_carbon.txt
+                    other_status = cat /home/container/share/nosteam/status_carbon.txt
+                    Error "Расширение NoSteam by Kaidoz временно работает некорректно с фреймворком Carbon!"
+                    if [ "${other_status}" == "1"]; then
+                        Error "Для запуска расширения выберите фреймворк Carbon во вкладке Запуск(Startup) -> Фреймворк."
+                    else
+                        Error "В данный момент всем фреймворкам был установлен этот статус."
+                        Error "Оффициальный репозиторий расширения https://github.com/Kaidoz/Rust-NoSteam"
+                        Error "Если новое обновление вышло, а статус не был расширения не был изменен, то обратитесь в дискорд uggtiu!"
+                    fi 
+                    Error "Сервер будет запущен, но без расширения NoSteam!"
+                    Debug "Пропускаю этот шаг!"
+                    fi    
+                fi
             fi
         fi
         
