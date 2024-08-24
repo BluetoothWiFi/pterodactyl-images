@@ -54,7 +54,7 @@ if [ "${RUSTEDIT_EXT}" == "1" ] || [ "${DISCORD_EXT}" == "1" ] || [ "${CHAOS_EXT
                     Success "Расширение NoSteam было загружено!"
                 else
                     other_status=$( cat /home/container/share/nosteam/status_oxide.txt )
-                    Error "Расширение NoSteam by Kaidoz временно работает некорректно с фреймворком Carbon!"
+                    Error "Расширение NoSteam by Kaidoz в данный момент работает некорректно с фреймворком Carbon!"
                     if [ "${other_status}" == "1" ]; then
                         Error "Для запуска расширения выберите фреймворк Oxide во вкладке Запуск(Startup) -> Фреймворк."
                     else
@@ -75,7 +75,7 @@ if [ "${RUSTEDIT_EXT}" == "1" ] || [ "${DISCORD_EXT}" == "1" ] || [ "${CHAOS_EXT
                     Success "Расширение NoSteam было загружено!"
                 else
                     other_status=$( cat /home/container/share/nosteam/status_carbon.txt )
-                    Error "Расширение NoSteam by Kaidoz временно работает некорректно с фреймворком Carbon!"
+                    Error "Расширение NoSteam by Kaidoz в данный момент работает некорректно с фреймворком Carbon!"
                     if [ "${other_status}" == "1" ]; then
                         Error "Для запуска расширения выберите фреймворк Carbon во вкладке Запуск(Startup) -> Фреймворк."
                     else
@@ -107,8 +107,13 @@ if [ "${RUSTEDIT_EXT}" == "1" ] || [ "${DISCORD_EXT}" == "1" ] || [ "${CHAOS_EXT
                     mv -v /home/container/temp/Oxide.Ext.*.dll "/home/container/${MODDING_ROOT}/extensions/"
                 fi
                 if [ "${NOSTEAM_EXT}" == "1" ]; then
-                    Error "Расширение NoSteam by Kaidoz временно не работает корректно с фреймворком Carbon и загружено не было!"
+                    if [ -f /home/container/temp/NoSteam.dll ]; then
+                        mv -v /home/container/temp/NoSteam.dll "/home/container/${MODDING_ROOT}/harmony/"
+                    #Error "Расширение NoSteam by Kaidoz в данный момент работает некорректно с фреймворком Carbon и загружено не было!"
                     #mv -v /home/container/temp/NoSteam.dll "/home/container/${MODDING_ROOT}/harmony/"
+                    else
+                        Error "Расширение NoSteam by Kaidoz загружено не было! См. консоль выше."
+                    fi
                 fi
             fi
             
@@ -119,7 +124,13 @@ if [ "${RUSTEDIT_EXT}" == "1" ] || [ "${DISCORD_EXT}" == "1" ] || [ "${CHAOS_EXT
                     mv -v /home/container/temp/Oxide.Ext.*.dll /home/container/RustDedicated_Data/Managed/
                 fi
                 if [ "${NOSTEAM_EXT}" == "1" ]; then
-                    mv -v /home/container/temp/NoSteam.dll "/home/container/HarmonyMods/"
+                    if [ -f /home/container/temp/NoSteam.dll ]; then
+                        mv -v /home/container/temp/NoSteam.dll "/home/container/HarmonyMods/"
+                        #Error "Расширение NoSteam by Kaidoz в данный момент работает некорректно с фреймворком Carbon и загружено не было!"
+                        #mv -v /home/container/temp/NoSteam.dll "/home/container/${MODDING_ROOT}/harmony/"
+                    else
+                        Error "Расширение NoSteam by Kaidoz загружено не было! См. консоль выше."
+                    fi
                 fi
             fi
 
